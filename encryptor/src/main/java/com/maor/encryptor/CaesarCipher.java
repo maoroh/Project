@@ -1,7 +1,5 @@
 package com.maor.encryptor;
 
-import java.util.Observable;
-
 public class CaesarCipher extends Cipher {
 
 	public CaesarCipher(byte key) {

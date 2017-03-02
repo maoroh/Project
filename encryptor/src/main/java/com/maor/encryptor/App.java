@@ -2,10 +2,6 @@ package com.maor.encryptor;
 
 import java.util.Scanner;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
     public static void main( String[] args )
@@ -16,7 +12,7 @@ public class App
         Key k = Key.generateKey(CipherType.Mult);
         UserInfo info = new UserInfo();
         System.out.println(k.key.get(0));
-        MultCipher c = new MultCipher(k.key.get(0));
+        SplitCipher c = new SplitCipher((byte)40,(byte)60);
         c.addObserver(info);
         c.encrypt( path);
         c.decrypt("t.txt.encrypted");

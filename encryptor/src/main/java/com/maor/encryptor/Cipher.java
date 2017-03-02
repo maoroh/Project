@@ -8,7 +8,7 @@ import java.util.Observable;
 
 public abstract class Cipher extends Observable
 {
-	byte key;
+	byte key,key2;
 	
 	public Cipher(byte key)
 	{
@@ -89,9 +89,10 @@ public abstract class Cipher extends Observable
 		setChanged();
 		this.notifyObservers(new EventInfo(System.currentTimeMillis(),1,"Decryption ended successfuly..."));
 	}
-	
-
-
+	public void changeKey(byte key)
+	{
+		this.key = key;
+	}
 	public abstract byte encryptOperation(byte content);
 	public abstract byte decryptOperation(byte content);
 }
