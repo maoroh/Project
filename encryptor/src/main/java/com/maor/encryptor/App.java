@@ -13,8 +13,11 @@ public class App
         System.out.println( "Please enter the path : " );
         Scanner in = new Scanner(System.in);
         String path = in.nextLine();
-        CaesarCipher.encrypt(120, path);
-        CaesarCipher.decrypt(120, "out.txt");
-        in.close();
+        Key k = Key.generateKey(CipherType.Caesar);
+     
+        MultCipher c = new MultCipher();
+        c.encrypt((byte)3, path);
+        c.decrypt((byte)3, "t.txt.encrypted");
+       // in.close();
     }
 }
