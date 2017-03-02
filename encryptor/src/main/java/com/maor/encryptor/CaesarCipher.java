@@ -1,5 +1,7 @@
 package com.maor.encryptor;
 
+import java.util.Observable;
+
 public class CaesarCipher extends Cipher {
 
 	@Override
@@ -20,4 +22,7 @@ public class CaesarCipher extends Cipher {
 		else content -= key;
 		return (byte)content;
 	}
+
+
+	
 }

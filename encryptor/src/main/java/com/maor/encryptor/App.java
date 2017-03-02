@@ -13,11 +13,13 @@ public class App
         System.out.println( "Please enter the path : " );
         Scanner in = new Scanner(System.in);
         String path = in.nextLine();
-        Key k = Key.generateKey(CipherType.Caesar);
-     
+        Key k = Key.generateKey(CipherType.Mult);
+        UserInfo info = new UserInfo();
+        System.out.println(k.key.get(0));
         MultCipher c = new MultCipher();
-        c.encrypt((byte)3, path);
-        c.decrypt((byte)3, "t.txt.encrypted");
-       // in.close();
+        c.addObserver(info);
+        c.encrypt(k.key.get(0), path);
+        c.decrypt(k.key.get(0), "neta.png.encrypted");
+        in.close();
     }
 }
