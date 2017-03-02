@@ -4,6 +4,11 @@ import java.util.Observable;
 
 public class CaesarCipher extends Cipher {
 
+	public CaesarCipher(byte key) {
+		super(key);
+	}
+
+
 	@Override
 	public byte encryptOperation(byte content,byte key) {
 		// TODO Auto-generated method stub

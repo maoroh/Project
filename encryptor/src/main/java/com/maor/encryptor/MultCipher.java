@@ -1,6 +1,14 @@
 package com.maor.encryptor;
 
 public class MultCipher extends Cipher {
+	
+	byte decryptKey;
+	
+	public MultCipher(byte key)
+	{
+		super(key);
+		decryptKey = findDecryptKey(key);
+	}
 
 	@Override
 	public byte encryptOperation(byte content, byte key) {
@@ -11,8 +19,7 @@ public class MultCipher extends Cipher {
 	@Override
 	public byte decryptOperation(byte content, byte key) {
 		// TODO Auto-generated method stub
-		byte decryptKey = findDecryptKey(key);
-		return (byte) (content * decryptKey);
+		return (byte) (content * this.decryptKey);
 	}
 	
 	public byte findDecryptKey(byte key)

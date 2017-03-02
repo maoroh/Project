@@ -8,8 +8,14 @@ import java.util.Observable;
 
 public abstract class Cipher extends Observable
 {
+	byte key;
 	
-	public void encrypt(byte key, String path)
+	public Cipher(byte key)
+	{
+		this.key = key;
+	}
+	
+	public void encrypt(String path)
 	{
 		File file = new File(path);
 		FileInputStream fis = null;
@@ -47,7 +53,7 @@ public abstract class Cipher extends Observable
 		}
 	}
 	
-	public void decrypt(byte key, String path)
+	public void decrypt(String path)
 	{
 		File file = new File(path);
 		FileInputStream fis = null;

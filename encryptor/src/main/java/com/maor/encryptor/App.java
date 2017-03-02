@@ -16,10 +16,10 @@ public class App
         Key k = Key.generateKey(CipherType.Mult);
         UserInfo info = new UserInfo();
         System.out.println(k.key.get(0));
-        MultCipher c = new MultCipher();
+        MultCipher c = new MultCipher(k.key.get(0));
         c.addObserver(info);
-        c.encrypt(k.key.get(0), path);
-        c.decrypt(k.key.get(0), "neta.png.encrypted");
+        c.encrypt( path);
+        c.decrypt("t.txt.encrypted");
         in.close();
     }
 }
