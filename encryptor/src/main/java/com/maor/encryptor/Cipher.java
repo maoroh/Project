@@ -30,7 +30,7 @@ public abstract class Cipher extends Observable
 
 			int content;
 			while ((content = fis.read()) != -1) {
-				fos.write(encryptOperation((byte)content,key));
+				fos.write(encryptOperation((byte)content));
 			}
 
 		} catch (IOException e) {
@@ -70,7 +70,7 @@ public abstract class Cipher extends Observable
 			int content;
 			while ((content = fis.read()) != -1) {
 				// convert to char and display it
-				fos.write(decryptOperation((byte)content,key));
+				fos.write(decryptOperation((byte)content));
 			}
 
 		} catch (IOException e) {
@@ -92,7 +92,7 @@ public abstract class Cipher extends Observable
 	
 
 
-	public abstract byte encryptOperation(byte content,byte key);
-	public abstract byte decryptOperation(byte content,byte key);
+	public abstract byte encryptOperation(byte content);
+	public abstract byte decryptOperation(byte content);
 }
 

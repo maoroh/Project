@@ -7,13 +7,13 @@ public class XORCipher extends Cipher{
 	}
 
 	@Override
-	public byte encryptOperation(byte content, byte key) {
+	public byte encryptOperation(byte content) {
 		// TODO Auto-generated method stub
 		return (byte) (content ^ key);
 	}
 
 	@Override
-	public byte decryptOperation(byte content, byte key) {
+	public byte decryptOperation(byte content) {
 		// TODO Auto-generated method stub
 		return (byte) (content ^ key);
 	}
