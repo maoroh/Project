@@ -20,11 +20,9 @@ public class CaesarCipher {
 
 			int content;
 			while ((content = fis.read()) != -1) {
-				System.out.println(content);
 				if(content + key > Byte.MAX_VALUE)
 					content = (content + key - Byte.MAX_VALUE - 1) + Byte.MIN_VALUE; 
 				else content += key;
-				System.out.println(content);
 				fos.write(content);
 			}
 
