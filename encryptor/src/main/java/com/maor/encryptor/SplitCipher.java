@@ -1,23 +1,26 @@
 package com.maor.encryptor;
 
+import com.maor.tools.KeyGenerator;
+
 public class SplitCipher extends Cipher {
 	Cipher c;
 	int index = 0;
-	int index1 = 0;
-	public SplitCipher(byte key1, byte key2) {
-		super(key1);
-		this.key2 = key2;
-		c = new CaesarCipher(key1);
+	public SplitCipher(CipherType type, Cipher c) 
+	{
+		super(type);
+		this.c = c;
+	
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public byte encryptOperation(byte content) {
 		// TODO Auto-generated method stub
-		index ++ ;
+		index ++;
 		if(index % 2 == 0) 
-			c.changeKey(key2);
-		else c.changeKey(key);
+			c.changeKey(this.getKey().getKey2());
+		else c.changeKey(this.getKey().getKey1());
+		index = 0;
 		return c.encryptOperation(content);
 		
 	}
@@ -27,9 +30,25 @@ public class SplitCipher extends Cipher {
 		// TODO Auto-generated method stub
 		index ++ ;
 		if(index % 2 == 0) 
-			c.changeKey(key2);
-		else c.changeKey(key);
+			c.changeKey(this.getKey().getKey2());
+		else c.changeKey(this.getKey().getKey1());
+		index = 0;
 			return c.decryptOperation(content);
 	}
 
+	@Override
+	public void generateKey() {
+		// TODO Auto-generated method stub
+		this.setKey(new Key(KeyGenerator.generateKey(c.getType()), KeyGenerator.generateKey(c.getType())));
+		KeyGenerator.createKeyFile(this.getKey());
+	}
+	
+	@Override
+	public void setKey(Key k)
+	{
+		this.k = k;
+		c.setKey(new Key(this.getKeyValue()));
+	}
+	
+	
 }

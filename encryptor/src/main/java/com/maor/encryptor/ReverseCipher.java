@@ -1,10 +1,12 @@
 package com.maor.encryptor;
 
+import com.maor.tools.KeyGenerator;
+
 public class ReverseCipher extends Cipher {
 	Cipher c;
-	public ReverseCipher(byte key1 ) {
-		super(key1);
-		c = new CaesarCipher(key1);
+	public ReverseCipher(CipherType type, Cipher c) {
+		super(type);
+		this.c = c;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -19,6 +21,21 @@ public class ReverseCipher extends Cipher {
 		// TODO Auto-generated method stub
 		return c.encryptOperation(content);
 	}
+
+	@Override
+	public void generateKey() {
+		// TODO Auto-generated method stub
+		this.setKey(new Key(KeyGenerator.generateKey(c.getType())));
+		KeyGenerator.createKeyFile(k);
+	}
+	
+	@Override
+	public void setKey(Key k)
+	{
+		this.k = k;
+		this.c.setKey(new Key(this.getKeyValue()));
+	}
+	
 	
 	
 }

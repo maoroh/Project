@@ -12,7 +12,7 @@ import com.maor.encryptor.Key;
 
 public final class KeyGenerator {
 	
-	public static Key generateKey(CipherType type)
+	public static byte generateKey(CipherType type)
 	{
 		byte [] key = new byte[1];
 		if(type == CipherType.Mult)
@@ -22,10 +22,9 @@ public final class KeyGenerator {
 			} while(key[0] % 2 == 0 || key[0] == 0);
 		}
 		else new Random().nextBytes(key);
-
-		Key k = new Key(key[0]);
-		createKeyFile(k);
-		return k;
+		
+		//createKeyFile(k);
+		return key[0];
 	}
 	
 	public static void createKeyFile(Key key)
@@ -56,13 +55,13 @@ public final class KeyGenerator {
 	   }
 	}
 	
-	public static Key readKeyFile()
+	public static Key readKeyFile(String path)
 	{
 		FileInputStream in = null;
 		ObjectInputStream obj_in = null;
 		Key key = null; 
 		 try {
-	         in = new FileInputStream("key.bin");
+	         in = new FileInputStream(path);
 	         obj_in = new ObjectInputStream(in);
 	         key = (Key) obj_in.readObject();
 
@@ -81,6 +80,7 @@ public final class KeyGenerator {
 		}
 		catch (IOException ex) {
 			ex.printStackTrace();
+			return null;
 		}
 	
 

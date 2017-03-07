@@ -6,17 +6,22 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Observable;
 
+import com.maor.tools.KeyGenerator;
+
 public abstract class Cipher extends Observable
 {
-	byte key,key2;
+	protected Key k;
+	protected CipherType type;
 	
-	public Cipher(byte key)
+	public Cipher(CipherType type)
 	{
-		this.key = key;
+		this.type = type;
+		this.k = null;
 	}
 	
 	public void encrypt(String path)
 	{
+		generateKey();
 		File file = new File(path);
 		FileInputStream fis = null;
 		FileOutputStream fos = null;
@@ -53,8 +58,9 @@ public abstract class Cipher extends Observable
 		}
 	}
 	
-	public void decrypt(String path)
+	public void decrypt(String path, Key k)
 	{
+		this.setKey(k);
 		File file = new File(path);
 		FileInputStream fis = null;
 		FileOutputStream fos = null;
@@ -71,6 +77,7 @@ public abstract class Cipher extends Observable
 			while ((content = fis.read()) != -1) {
 				// convert to char and display it
 				fos.write(decryptOperation((byte)content));
+				
 			}
 
 		} catch (IOException e) {
@@ -89,11 +96,38 @@ public abstract class Cipher extends Observable
 		setChanged();
 		this.notifyObservers(new EventInfo(System.currentTimeMillis(),1,"Decryption ended successfuly..."));
 	}
-	public void changeKey(byte key)
+	
+	protected void changeKey(byte key)
 	{
-		this.key = key;
+		this.k.setKey1(key);
 	}
-	public abstract byte encryptOperation(byte content);
-	public abstract byte decryptOperation(byte content);
+
+	protected CipherType getType() {
+		// TODO Auto-generated method stub
+		return this.type;
+	}
+	
+
+	public abstract void generateKey();
+	
+	protected void setKey(Key k)
+	{
+		this.k = k;
+	}
+	
+	protected Key getKey()
+	{
+		return this.k;
+	}
+	
+	protected byte getKeyValue()
+	{
+		return this.getKey().getKey1();
+	}
+	
+	
+	protected abstract byte encryptOperation(byte content);
+	protected abstract byte decryptOperation(byte content);
+
 }
 

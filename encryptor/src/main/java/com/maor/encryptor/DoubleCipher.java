@@ -1,13 +1,13 @@
 package com.maor.encryptor;
 
+import com.maor.tools.KeyGenerator;
+
 public class DoubleCipher extends Cipher {
-	Cipher c1,c2;
-	public DoubleCipher(byte key1 , byte key2) {
-		super(key1);
-		this.key2 = key2;
-		c1 = new CaesarCipher(key1);
-		c2 = new XORCipher(key2);
-		// TODO Auto-generated constructor stub
+	private Cipher c1,c2;
+	public DoubleCipher(CipherType type, Cipher c1, Cipher c2) {
+		super(type);
+		this.c1 = c1;
+		this.c2 = c2;
 	}
 
 	@Override
@@ -20,6 +20,22 @@ public class DoubleCipher extends Cipher {
 	public byte decryptOperation(byte content) {
 		// TODO Auto-generated method stub
 		return c1.decryptOperation(c2.decryptOperation(content));
+	}
+
+	@Override
+	public void generateKey() {
+		// TODO Auto-generated method stub
+	
+		this.setKey(new Key(KeyGenerator.generateKey(this.c1.getType()), KeyGenerator.generateKey(this.c2.getType())));
+		KeyGenerator.createKeyFile(this.getKey());
+	}
+	
+	@Override
+	public void setKey(Key k)
+	{
+		this.k = k;
+		c1.setKey(new Key(k.getKey1()));
+		c2.setKey(new Key(k.getKey2()));
 	}
 	
 	

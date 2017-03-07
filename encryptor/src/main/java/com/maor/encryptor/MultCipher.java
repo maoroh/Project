@@ -1,19 +1,21 @@
 package com.maor.encryptor;
 
+import com.maor.tools.KeyGenerator;
+
 public class MultCipher extends Cipher {
 	
 	byte decryptKey;
 	
-	public MultCipher(byte key)
+	public MultCipher(CipherType type)
 	{
-		super(key);
-		decryptKey = findDecryptKey(key);
+		super(type);
+		
 	}
 
 	@Override
 	public byte encryptOperation(byte content) {
 		// TODO Auto-generated method stub
-		return (byte) (content * key);
+		return (byte) (content * this.getKeyValue());
 	}
 
 	@Override
@@ -24,7 +26,7 @@ public class MultCipher extends Cipher {
 	
 	public byte findDecryptKey(byte key)
 	{
-		byte mul=-1;
+		byte mul = -1;
 		for(byte i = Byte.MIN_VALUE; i<=Byte.MAX_VALUE; i++)
 		{
 			mul = (byte) (i * key);
@@ -33,6 +35,26 @@ public class MultCipher extends Cipher {
 		}
 		
 		return mul;
+	}
+	
+	@Override
+	public void changeKey(byte key)
+	{
+		this.getKey().setKey1(key);
+		decryptKey = findDecryptKey(key);
+	}
+
+	@Override
+	public void generateKey() {
+
+		this.setKey(new Key(KeyGenerator.generateKey(this.getType())));
+		KeyGenerator.createKeyFile(k);
+	}
+	
+	public void setKey(Key k)
+	{
+		this.k = k;
+		decryptKey = findDecryptKey(this.getKeyValue());
 	}
 
 }
