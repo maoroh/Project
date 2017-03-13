@@ -21,7 +21,8 @@ public abstract class Cipher extends Observable
 	
 	public void encrypt(String path)
 	{
-		generateKey();
+		if(k == null)
+			generateKey();
 		File file = new File(path);
 		FileInputStream fis = null;
 		FileOutputStream fos = null;
@@ -39,6 +40,7 @@ public abstract class Cipher extends Observable
 			}
 
 		} catch (IOException e) {
+			System.out.println("Error : File Not Found!");
 			e.printStackTrace();
 		
 		} finally {

@@ -1,5 +1,7 @@
 package com.maor.encryptor;
 
+import java.util.InputMismatchException;
+
 import com.maor.tools.KeyGenerator;
 
 public class MultCipher extends Cipher {
@@ -27,6 +29,7 @@ public class MultCipher extends Cipher {
 	public byte findDecryptKey(byte key)
 	{
 		byte mul = -1;
+		if(key % 2 == 0) throw new InputMismatchException("The key is an even number!");
 		for(byte i = Byte.MIN_VALUE; i<=Byte.MAX_VALUE; i++)
 		{
 			mul = (byte) (i * key);

@@ -4,7 +4,7 @@ import com.maor.tools.KeyGenerator;
 
 public class SplitCipher extends Cipher {
 	Cipher c;
-	int index = 0;
+	boolean even = false;
 	public SplitCipher(CipherType type, Cipher c) 
 	{
 		super(type);
@@ -16,11 +16,17 @@ public class SplitCipher extends Cipher {
 	@Override
 	public byte encryptOperation(byte content) {
 		// TODO Auto-generated method stub
-		index ++;
-		if(index % 2 == 0) 
+		if(even) 
+		{
 			c.changeKey(this.getKey().getKey2());
-		else c.changeKey(this.getKey().getKey1());
-		index = 0;
+			even = false;
+		}
+		else 
+		{
+			c.changeKey(this.getKey().getKey1());
+			even = true;
+		}
+		
 		return c.encryptOperation(content);
 		
 	}
@@ -28,11 +34,16 @@ public class SplitCipher extends Cipher {
 	@Override
 	public byte decryptOperation(byte content) {
 		// TODO Auto-generated method stub
-		index ++ ;
-		if(index % 2 == 0) 
+		if(even) 
+		{
 			c.changeKey(this.getKey().getKey2());
-		else c.changeKey(this.getKey().getKey1());
-		index = 0;
+			even = false;
+		}
+		else 
+		{
+			c.changeKey(this.getKey().getKey1());
+			even = true;
+		}
 			return c.decryptOperation(content);
 	}
 

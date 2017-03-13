@@ -9,12 +9,12 @@ public class UserInfo implements Observer{
 	public void update(Observable o, Object arg) {
 		
 		EventInfo event = (EventInfo)arg;
-		if(event.id == 0)
+		if(event.getId() == 0)
 		{
-			lastTime = event.time;
-			System.out.println(event.message);
+			lastTime = event.getTime();
+			System.out.println(event.getMessage());
 		}
-		else System.out.println(event.message + "Process time:  " + (event.time-lastTime) + "ms");
+		else System.out.println(event.getMessage() + "Process time:  " + (event.getTime()-lastTime) + " ms");
 		
 	}
 	
