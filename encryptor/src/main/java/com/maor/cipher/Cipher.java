@@ -1,4 +1,4 @@
-package com.maor.encryptor;
+package com.maor.cipher;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,6 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Observable;
 
+import com.maor.tools.CipherType;
+import com.maor.tools.EventInfo;
+import com.maor.tools.Key;
 import com.maor.tools.KeyGenerator;
 
 public abstract class Cipher extends Observable
@@ -21,9 +24,16 @@ public abstract class Cipher extends Observable
 	
 	public void encrypt(String path)
 	{
-		if(k == null)
-			generateKey();
 		File file = new File(path);
+		
+		synchronized (this) 	
+		{
+			if(k == null)
+			{
+				generateKey(file.getParent());
+			}
+		}
+		
 		FileInputStream fis = null;
 		FileOutputStream fos = null;
 		setChanged();
@@ -62,7 +72,11 @@ public abstract class Cipher extends Observable
 	
 	public void decrypt(String path, Key k)
 	{
-		this.setKey(k);
+		synchronized (this) 	
+		{
+			this.setKey(k);
+		}
+	
 		File file = new File(path);
 		FileInputStream fis = null;
 		FileOutputStream fos = null;
@@ -77,7 +91,6 @@ public abstract class Cipher extends Observable
 
 			int content;
 			while ((content = fis.read()) != -1) {
-				// convert to char and display it
 				fos.write(decryptOperation((byte)content));
 				
 			}
@@ -109,10 +122,10 @@ public abstract class Cipher extends Observable
 		return this.type;
 	}
 	
-
-	public abstract void generateKey();
 	
-	protected void setKey(Key k)
+	public abstract void generateKey(String path);
+	
+	public void setKey(Key k)
 	{
 		this.k = k;
 	}

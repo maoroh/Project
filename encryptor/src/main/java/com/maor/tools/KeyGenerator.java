@@ -7,9 +7,6 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 import java.util.Random;
 
-import com.maor.encryptor.CipherType;
-import com.maor.encryptor.Key;
-
 public final class KeyGenerator {
 	
 	public static byte generateKey(CipherType type)
@@ -27,12 +24,15 @@ public final class KeyGenerator {
 		return key[0];
 	}
 	
-	public static void createKeyFile(Key key)
+	public static void createKeyFile(Key key , String path)
 	{
 		FileOutputStream out = null;
 		 ObjectOutputStream obj_out = null;
 		 try {
-	         out = new FileOutputStream("key.bin");
+			 if(path == null) 
+			 out = new FileOutputStream("key.bin");
+			 else
+			 out = new FileOutputStream(path + "/" + "key.bin");
 	         obj_out = new ObjectOutputStream(out);
 	         obj_out.writeObject(key);
 

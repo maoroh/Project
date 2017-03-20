@@ -1,4 +1,4 @@
-package com.maor.encryptor;
+package com.maor.tools;
 
 import java.util.Observable;
 import java.util.Observer;

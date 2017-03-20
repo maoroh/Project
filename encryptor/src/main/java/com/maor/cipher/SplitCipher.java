@@ -1,5 +1,7 @@
-package com.maor.encryptor;
+package com.maor.cipher;
 
+import com.maor.tools.CipherType;
+import com.maor.tools.Key;
 import com.maor.tools.KeyGenerator;
 
 public class SplitCipher extends Cipher {
@@ -48,17 +50,18 @@ public class SplitCipher extends Cipher {
 	}
 
 	@Override
-	public void generateKey() {
+	public void generateKey(String path) {
 		// TODO Auto-generated method stub
 		this.setKey(new Key(KeyGenerator.generateKey(c.getType()), KeyGenerator.generateKey(c.getType())));
-		KeyGenerator.createKeyFile(this.getKey());
+		KeyGenerator.createKeyFile(this.getKey() , path);
+		
 	}
 	
 	@Override
 	public void setKey(Key k)
 	{
 		this.k = k;
-		c.setKey(new Key(this.getKeyValue()));
+		c.setKey(new Key(this.getKey().getKey1(), this.getKey().getKey2()));
 	}
 	
 	

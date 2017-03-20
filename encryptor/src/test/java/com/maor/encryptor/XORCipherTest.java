@@ -5,6 +5,10 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.maor.cipher.XORCipher;
+import com.maor.tools.CipherType;
+import com.maor.tools.Key;
+
 public class XORCipherTest extends AbstractCipherTest {
 	
 	 

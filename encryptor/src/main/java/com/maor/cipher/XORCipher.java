@@ -1,5 +1,7 @@
-package com.maor.encryptor;
+package com.maor.cipher;
 
+import com.maor.tools.CipherType;
+import com.maor.tools.Key;
 import com.maor.tools.KeyGenerator;
 
 public class XORCipher extends Cipher{
@@ -22,10 +24,10 @@ public class XORCipher extends Cipher{
 	}
 
 	@Override
-	public void generateKey() {
+	public void generateKey(String path) {
 		// TODO Auto-generated method stub
 		this.setKey(new Key(KeyGenerator.generateKey(this.getType())));
-		KeyGenerator.createKeyFile(this.getKey());
+		KeyGenerator.createKeyFile(this.getKey() , path);
 	}
 	
 	

@@ -1,5 +1,7 @@
-package com.maor.encryptor;
+package com.maor.cipher;
 
+import com.maor.tools.CipherType;
+import com.maor.tools.Key;
 import com.maor.tools.KeyGenerator;
 
 public class DoubleCipher extends Cipher {
@@ -23,11 +25,11 @@ public class DoubleCipher extends Cipher {
 	}
 
 	@Override
-	public void generateKey() {
+	public void generateKey(String path) {
 		// TODO Auto-generated method stub
 	
 		this.setKey(new Key(KeyGenerator.generateKey(this.c1.getType()), KeyGenerator.generateKey(this.c2.getType())));
-		KeyGenerator.createKeyFile(this.getKey());
+		KeyGenerator.createKeyFile(this.getKey(), path);
 	}
 	
 	@Override

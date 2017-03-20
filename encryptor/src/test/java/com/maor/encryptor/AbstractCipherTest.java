@@ -6,6 +6,9 @@ import java.io.IOException;
 import org.junit.Rule;
 import org.junit.rules.TemporaryFolder;
 
+import com.maor.cipher.Cipher;
+import com.maor.tools.Key;
+
 import junitx.framework.FileAssert;
 
 public class AbstractCipherTest {

@@ -1,7 +1,9 @@
-package com.maor.encryptor;
+package com.maor.cipher;
 
 import java.util.InputMismatchException;
 
+import com.maor.tools.CipherType;
+import com.maor.tools.Key;
 import com.maor.tools.KeyGenerator;
 
 public class MultCipher extends Cipher {
@@ -11,7 +13,6 @@ public class MultCipher extends Cipher {
 	public MultCipher(CipherType type)
 	{
 		super(type);
-		
 	}
 
 	@Override
@@ -48,10 +49,10 @@ public class MultCipher extends Cipher {
 	}
 
 	@Override
-	public void generateKey() {
+	public void generateKey(String path) {
 
 		this.setKey(new Key(KeyGenerator.generateKey(this.getType())));
-		KeyGenerator.createKeyFile(k);
+		KeyGenerator.createKeyFile(k , path);
 	}
 	
 	public void setKey(Key k)

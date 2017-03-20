@@ -1,4 +1,4 @@
-package com.maor.encryptor;
+package com.maor.tools;
 
 public class EventInfo {
 	private long time;
