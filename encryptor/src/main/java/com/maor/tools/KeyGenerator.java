@@ -7,6 +7,8 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 import java.util.Random;
 
+import com.maor.cipher.Key;
+
 public final class KeyGenerator {
 	
 	public static byte generateKey(CipherType type)

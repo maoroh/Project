@@ -7,7 +7,7 @@ import org.junit.Rule;
 import org.junit.rules.TemporaryFolder;
 
 import com.maor.cipher.Cipher;
-import com.maor.tools.Key;
+import com.maor.cipher.Key;
 
 import junitx.framework.FileAssert;
 
@@ -31,11 +31,11 @@ public class AbstractCipherTest {
         FileOutputStream fo = new FileOutputStream(testFileIn);
         File expected = folder.newFile();
         FileOutputStream fo2 = new FileOutputStream(expected);
-        File actual = folder.newFile(testFileIn.getName()+ ".encrypted");
         cipher.setKey(key);
         fo.write(this.input);
         fo2.write(this.output);
         this.cipher.encrypt(testFileIn.getPath());
+        File actual = new File(folder.getRoot() + "/EncryptedFiles/" + testFileIn.getName()+ ".encrypted");
         FileAssert.assertBinaryEquals(expected, actual);
         fo.close();
         fo2.close();

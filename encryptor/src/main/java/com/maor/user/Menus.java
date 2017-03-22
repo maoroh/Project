@@ -1,4 +1,4 @@
-package com.maor.tools;
+package com.maor.user;
 
 import java.io.File;
 import java.util.HashMap;
@@ -9,10 +9,15 @@ import java.util.Scanner;
 import com.maor.cipher.CaesarCipher;
 import com.maor.cipher.Cipher;
 import com.maor.cipher.DoubleCipher;
+import com.maor.cipher.Key;
 import com.maor.cipher.MultCipher;
 import com.maor.cipher.ReverseCipher;
 import com.maor.cipher.SplitCipher;
 import com.maor.cipher.XORCipher;
+import com.maor.tools.CipherType;
+import com.maor.tools.DirectoryTools;
+import com.maor.tools.JAXBTools;
+import com.maor.tools.KeyGenerator;
 
 public class Menus {
 	
@@ -91,12 +96,12 @@ public class Menus {
         	
         }
         
-        UserInfo info = new UserInfo();
+        FileEventHandler info = new FileEventHandler();
         c.addObserver(info);
         if(encrypt) 
         {
         	File f = new File(path);
-        	if(f.isDirectory()) DirectoryTools.directoryEncryption(path,c);
+        	if(f.isDirectory()) DirectoryTools.directoryEncryption(path,c,info);
         	else c.encrypt(path);
         	
         }
@@ -109,13 +114,13 @@ public class Menus {
         	Key k2 = KeyGenerator.readKeyFile(path1);
         	//System.out.println(k2.getKey1());
         	File f = new File(path);
-        	if(f.isDirectory()) DirectoryTools.directoryDecryption(path,c,k2);
+        	if(f.isDirectory()) DirectoryTools.directoryDecryption(path,c,k2,info);
         	else c.decrypt(path,k2);
         	in2.close();
         }
         
       
-
+        
       
     }
     

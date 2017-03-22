@@ -6,22 +6,37 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import com.maor.cipher.Cipher;
+import com.maor.cipher.Key;
+import com.maor.user.FileEventHandler;;
 
 public class ManageThreads {
 	
 	final static int NUM_OF_THREADS = 4;
 	
 	
-	public static void createThreads(Cipher cipher, File [] listOfFiles , Operation operation , Key key)
+	public static void createThreads(Cipher cipher,FileEventHandler info , File [] listOfFiles , Operation operation , Key key)
 	{
 			//Create a pool with 4 threads maximum in parallel.
 			ExecutorService executor = Executors.newFixedThreadPool(NUM_OF_THREADS);
 			
+			if(key == null ) cipher.generateKey(listOfFiles[0].getParent());
 			for(int i = 0; i < listOfFiles.length; i++)
 			{
-				if(!listOfFiles[i].getName().equals("key.bin")){
-				Runnable worker = new CipherTask(cipher , listOfFiles[i].getPath(),operation,key);
-	            executor.execute(worker);}
+				if(listOfFiles[i].isFile()){
+				Runnable worker;
+				try {
+					
+					Cipher c = (Cipher)cipher.clone();
+					c.addObserver(info);
+					if(key != null )
+					worker = new CipherTask(c , listOfFiles[i].getPath(),operation,new Key (key.getKey1(), key.getKey2()));
+					else worker = new CipherTask(c , listOfFiles[i].getPath(),operation,null);
+					executor.execute(worker);
+				} catch (CloneNotSupportedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	          }
 			}
 			
 			executor.shutdown();
@@ -32,6 +47,7 @@ public class ManageThreads {
 				System.out.println("Error while waiting...");
 				e.printStackTrace();
 			}
+			
 	}
 }
 

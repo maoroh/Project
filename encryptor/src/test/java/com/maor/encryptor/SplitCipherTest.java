@@ -6,9 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.maor.cipher.CaesarCipher;
+import com.maor.cipher.Key;
 import com.maor.cipher.SplitCipher;
 import com.maor.tools.CipherType;
-import com.maor.tools.Key;
 
 public class SplitCipherTest extends AbstractCipherTest{
 	@Before
@@ -31,6 +31,7 @@ public class SplitCipherTest extends AbstractCipherTest{
 	    this.setKey(new Key(((byte)10),((byte) 30)));
 	    this.setOutput(new byte [] {(byte)20,(byte)50,(byte)44,(byte)72} );
 	    super.testEncrypt();  
+	    
 	}
 	
 	@Test

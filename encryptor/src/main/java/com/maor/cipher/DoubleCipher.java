@@ -1,7 +1,6 @@
 package com.maor.cipher;
 
 import com.maor.tools.CipherType;
-import com.maor.tools.Key;
 import com.maor.tools.KeyGenerator;
 
 public class DoubleCipher extends Cipher {
@@ -29,7 +28,7 @@ public class DoubleCipher extends Cipher {
 		// TODO Auto-generated method stub
 	
 		this.setKey(new Key(KeyGenerator.generateKey(this.c1.getType()), KeyGenerator.generateKey(this.c2.getType())));
-		KeyGenerator.createKeyFile(this.getKey(), path);
+		KeyGenerator.createKeyFile(this.getKey() , path);
 	}
 	
 	@Override
@@ -39,6 +38,14 @@ public class DoubleCipher extends Cipher {
 		c1.setKey(new Key(k.getKey1()));
 		c2.setKey(new Key(k.getKey2()));
 	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException{  
+		DoubleCipher c = new DoubleCipher(CipherType.Double, (Cipher)this.c1.clone(), (Cipher)this.c2.clone());
+		if(this.getKey() != null) 
+			c.setKey(new Key (this.getKey().getKey1(),this.getKey().getKey2()));
+		return c;  
+		}
 	
 	
 

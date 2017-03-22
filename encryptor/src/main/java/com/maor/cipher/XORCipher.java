@@ -1,7 +1,6 @@
 package com.maor.cipher;
 
 import com.maor.tools.CipherType;
-import com.maor.tools.Key;
 import com.maor.tools.KeyGenerator;
 
 public class XORCipher extends Cipher{
@@ -30,6 +29,13 @@ public class XORCipher extends Cipher{
 		KeyGenerator.createKeyFile(this.getKey() , path);
 	}
 	
+	@Override
+	public Object clone() throws CloneNotSupportedException{ 
+		XORCipher c = new XORCipher(CipherType.XOR);
+		if(this.getKey() != null) 
+			c.setKey(new Key (this.getKeyValue()));
+		return c; }
+
 	
 
 }

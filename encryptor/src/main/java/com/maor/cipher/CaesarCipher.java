@@ -1,7 +1,6 @@
 package com.maor.cipher;
 
 import com.maor.tools.CipherType;
-import com.maor.tools.Key;
 import com.maor.tools.KeyGenerator;
 
 public class CaesarCipher extends Cipher {
@@ -36,9 +35,16 @@ public class CaesarCipher extends Cipher {
 	
 	public void generateKey(String path) {
 		this.setKey(new Key(KeyGenerator.generateKey(this.getType())));
-		KeyGenerator.createKeyFile(this.getKey(),path);
+		KeyGenerator.createKeyFile(this.getKey() , path);
 	
 	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException{ 
+		CaesarCipher c = new CaesarCipher(CipherType.Caesar);
+		if(this.getKey() != null) 
+			c.setKey(new Key (this.getKeyValue()));
+		return c; }
 
 
 	

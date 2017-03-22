@@ -1,7 +1,6 @@
 package com.maor.cipher;
 
 import com.maor.tools.CipherType;
-import com.maor.tools.Key;
 import com.maor.tools.KeyGenerator;
 
 public class ReverseCipher extends Cipher {
@@ -28,7 +27,7 @@ public class ReverseCipher extends Cipher {
 	public void generateKey(String path) {
 		// TODO Auto-generated method stub
 		this.setKey(new Key(KeyGenerator.generateKey(c.getType())));
-		KeyGenerator.createKeyFile(k , path);
+		KeyGenerator.createKeyFile(this.getKey() , path);
 	}
 	
 	@Override
@@ -37,6 +36,14 @@ public class ReverseCipher extends Cipher {
 		this.k = k;
 		this.c.setKey(new Key(this.getKeyValue()));
 	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException{  
+		ReverseCipher c = new ReverseCipher(CipherType.Reverse, (Cipher)this.c.clone());
+		if(this.getKey() != null) 
+			c.setKey(new Key (this.getKeyValue()));
+		return c;  
+		}
 	
 	
 	

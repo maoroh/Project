@@ -4,8 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.maor.cipher.CaesarCipher;
+import com.maor.cipher.Key;
 import com.maor.tools.CipherType;
-import com.maor.tools.Key;
 
 
 public class CaesarCipherTest extends AbstractCipherTest {

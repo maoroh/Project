@@ -1,8 +1,8 @@
 package com.maor.cipher;
 
 import com.maor.tools.CipherType;
-import com.maor.tools.Key;
 import com.maor.tools.KeyGenerator;
+import com.maor.cipher.Key;
 
 public class SplitCipher extends Cipher {
 	Cipher c;
@@ -15,17 +15,17 @@ public class SplitCipher extends Cipher {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
+	
 	public byte encryptOperation(byte content) {
 		// TODO Auto-generated method stub
 		if(even) 
 		{
-			c.changeKey(this.getKey().getKey2());
+			c.changeKey(2);
 			even = false;
 		}
 		else 
 		{
-			c.changeKey(this.getKey().getKey1());
+			c.changeKey(1);
 			even = true;
 		}
 		
@@ -33,17 +33,17 @@ public class SplitCipher extends Cipher {
 		
 	}
 
-	@Override
+	
 	public byte decryptOperation(byte content) {
 		// TODO Auto-generated method stub
 		if(even) 
 		{
-			c.changeKey(this.getKey().getKey2());
+			c.changeKey(2);
 			even = false;
 		}
 		else 
 		{
-			c.changeKey(this.getKey().getKey1());
+			c.changeKey(1);
 			even = true;
 		}
 			return c.decryptOperation(content);
@@ -63,6 +63,16 @@ public class SplitCipher extends Cipher {
 		this.k = k;
 		c.setKey(new Key(this.getKey().getKey1(), this.getKey().getKey2()));
 	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException{  
+		SplitCipher c = new SplitCipher(CipherType.Split, (Cipher)this.c.clone());
+		if(this.getKey() != null) 
+			c.setKey(new Key (this.getKey().getKey1(),this.getKey().getKey2()));
+		return c;  
+		}
+
+	
 	
 	
 }

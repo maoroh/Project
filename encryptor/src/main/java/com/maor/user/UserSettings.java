@@ -1,8 +1,11 @@
-package com.maor.tools;
+package com.maor.user;
 
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.maor.tools.CipherType;
+
 import javax.xml.bind.annotation.XmlAccessType;
 
 @XmlRootElement(name = "UserSettings")

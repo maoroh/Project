@@ -3,12 +3,11 @@ package com.maor.cipher;
 import java.util.InputMismatchException;
 
 import com.maor.tools.CipherType;
-import com.maor.tools.Key;
 import com.maor.tools.KeyGenerator;
 
 public class MultCipher extends Cipher {
 	
-	byte decryptKey;
+	Byte decryptKey=null,decryptKey1=null,decryptKey2=null;
 	
 	public MultCipher(CipherType type)
 	{
@@ -24,6 +23,7 @@ public class MultCipher extends Cipher {
 	@Override
 	public byte decryptOperation(byte content) {
 		// TODO Auto-generated method stub
+		
 		return (byte) (content * this.decryptKey);
 	}
 	
@@ -42,23 +42,39 @@ public class MultCipher extends Cipher {
 	}
 	
 	@Override
-	public void changeKey(byte key)
+	public void changeKey(int n)
 	{
-		this.getKey().setKey1(key);
-		decryptKey = findDecryptKey(key);
+		if(n==1) decryptKey = decryptKey1;
+		else if(n==2) decryptKey = decryptKey2;
+		super.changeKey(n);	
 	}
 
 	@Override
 	public void generateKey(String path) {
 
 		this.setKey(new Key(KeyGenerator.generateKey(this.getType())));
-		KeyGenerator.createKeyFile(k , path);
+		KeyGenerator.createKeyFile(this.getKey() , path);
+		decryptKey1 = findDecryptKey(this.getKey().getKey1());
+		if(this.getKey().getKey2() != null )
+			decryptKey2 = findDecryptKey(this.getKey().getKey2());
+		decryptKey = decryptKey1;
 	}
 	
 	public void setKey(Key k)
 	{
 		this.k = k;
-		decryptKey = findDecryptKey(this.getKeyValue());
+		decryptKey1 = findDecryptKey(this.getKey().getKey1());
+		if(this.getKey().getKey2() != null )
+			decryptKey2 = findDecryptKey(this.getKey().getKey2());
+		decryptKey = decryptKey1;
 	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException{ 
+		MultCipher c = new MultCipher(CipherType.Mult);
+		if(this.getKey() != null) 
+			c.setKey(new Key (this.getKeyValue()));
+		return c; }
+
 
 }
