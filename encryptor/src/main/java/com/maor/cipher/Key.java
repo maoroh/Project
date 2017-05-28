@@ -5,6 +5,7 @@ public class Key implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Byte key = null,key1=null, key2=null;
 	
+	
 	public Key(byte key1)
 	{
 		this.setKey(key1);

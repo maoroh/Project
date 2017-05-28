@@ -19,16 +19,6 @@ public class UserSettings {
 	{
 		this.setType(null);
 	}
-	public UserSettings(CipherType type )
-	{
-		this.setType(type);
-	}
-	
-	public UserSettings(CipherType type , CipherType subtype)
-	{
-		this.setType(type);
-		this.setSubType1(subtype);
-	}
 	
 	public UserSettings(CipherType type , CipherType subtype , CipherType subtype2)
 	{

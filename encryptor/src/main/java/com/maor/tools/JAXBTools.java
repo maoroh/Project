@@ -17,7 +17,6 @@ public class JAXBTools {
 			 jaxbContext = JAXBContext.newInstance(UserSettings.class);
 		     jaxbMarshaller = jaxbContext.createMarshaller();
 		     jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		     jaxbMarshaller.marshal(settings, System.out);
 		     jaxbMarshaller.marshal(settings, new File("settings.xml"));
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
@@ -35,7 +34,6 @@ public class JAXBTools {
 			 jaxbContext = JAXBContext.newInstance(DirectoryXMLReport.class);
 		     jaxbMarshaller = jaxbContext.createMarshaller();
 		     jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		     jaxbMarshaller.marshal(reports, System.out);
 		     jaxbMarshaller.marshal(reports, new File(path +"/"+ "report.xml"));
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block

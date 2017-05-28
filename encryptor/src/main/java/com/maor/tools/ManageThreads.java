@@ -29,7 +29,7 @@ public class ManageThreads {
 					Cipher c = (Cipher)cipher.clone();
 					c.addObserver(info);
 					if(key != null )
-					worker = new CipherTask(c , listOfFiles[i].getPath(),operation,new Key (key.getKey1(), key.getKey2()));
+						worker = new CipherTask(c , listOfFiles[i].getPath(),operation, key);
 					else worker = new CipherTask(c , listOfFiles[i].getPath(),operation,null);
 					executor.execute(worker);
 				} catch (CloneNotSupportedException e) {

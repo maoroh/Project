@@ -72,6 +72,12 @@ public class AbstractCipherTest {
 		this.output = output;
 	}
 	
+	public void setCipher(Cipher c)
+	{
+		this.cipher = c;
+	}
+	
+	
 	public void setKey(Key key)
 	{
 		this.key = key;

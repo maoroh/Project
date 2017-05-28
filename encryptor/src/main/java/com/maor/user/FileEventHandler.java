@@ -16,8 +16,7 @@ public class FileEventHandler implements Observer{
 	
 	public FileEventHandler ()
 	{	
-		BasicConfigurator.configure();
-		 directoryReport = new DirectoryXMLReport();
+		directoryReport = new DirectoryXMLReport();
 	}
 	 
 	@Override
@@ -28,7 +27,7 @@ public class FileEventHandler implements Observer{
 		if(event.getId() == EventEnum.Start)
 		{
 			
-			//System.out.println(event.getMessage());
+			System.out.println(event.getMessage());
 			logger.info(event.getMessage());
 		}
 		else if(event.getId() == EventEnum.Finish)
@@ -38,7 +37,7 @@ public class FileEventHandler implements Observer{
 			
 			event.setTime(time);
 			directoryReport.addReport(event);
-			//System.out.println(event.getMessage() + "Process time:  " + (event.getTime()-lastTime) + " ms");
+			System.out.println(event.getMessage());
 		}
 		
 		else if(event.getId() == EventEnum.Error)

@@ -68,7 +68,7 @@ public final class KeyGenerator {
 	         key = (Key) obj_in.readObject();
 
 	      } catch (Exception ex) {
-	         ex.printStackTrace();
+	         //ex.printStackTrace();
 	         return null;
 	      }
 	 finally {
@@ -77,11 +77,11 @@ public final class KeyGenerator {
 				in.close();
 			}
 			catch (NullPointerException ex) {
-			ex.printStackTrace();
+			//ex.printStackTrace();
 			return null;
 		}
 		catch (IOException ex) {
-			ex.printStackTrace();
+			//ex.printStackTrace();
 			return null;
 		}
 	

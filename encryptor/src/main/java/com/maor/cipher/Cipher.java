@@ -9,6 +9,10 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Observable;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.apache.log4j.Logger;
 
 import com.maor.tools.CipherType;
@@ -22,6 +26,7 @@ public abstract class Cipher extends Observable implements Cloneable
 	protected Key k;
 	protected CipherType type;
 	static final Logger logger = Logger.getLogger(Cipher.class);
+
 	
 	public Cipher(CipherType type)
 	{
@@ -155,7 +160,7 @@ public abstract class Cipher extends Observable implements Cloneable
 		else if(n==2) this.k.setKey(this.k.getKey2());
 	}
 
-	protected CipherType getType() {
+	public CipherType getType() {
 		// TODO Auto-generated method stub
 		return this.type;
 	}
@@ -184,6 +189,9 @@ public abstract class Cipher extends Observable implements Cloneable
 	
 	protected abstract byte encryptOperation(byte content);
 	protected abstract byte decryptOperation(byte content);
+	
+	
+	
 
 }
 
